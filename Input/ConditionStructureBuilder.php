@@ -410,7 +410,7 @@ class ConditionStructureBuilder implements StructureBuilder
 
     private function validateRangeBounds(Range $range, array $path, $lower, $upper): void
     {
-        if (! $this->fieldConfig->getValueComparator()->isLower($range->getLower(), $range->getUpper(), $this->fieldConfig->getOptions())) {
+        if (! $this->fieldConfig->getValueComparator()->isLower($range->lower, $range->upper, $this->fieldConfig->getOptions())) {
             $message = 'The lower range value {{ lower }} should be lower than the upper range value {{ upper }}.';
             $params = [
                 '{{ lower }}' => mb_strpos((string) $lower, ' ') ? "'" . $lower . "'" : $lower,
@@ -425,7 +425,7 @@ class ConditionStructureBuilder implements StructureBuilder
         $class = $range::class;
 
         // Perform validation for both bounds (don't move to bounds validator as that returns early).
-        $this->validator->validate($range->getLower(), $class, $lower, $path[0] . $path[1]);
-        $this->validator->validate($range->getUpper(), $class, $upper, $path[0] . $path[2]);
+        $this->validator->validate($range->lower, $class, $lower, $path[0] . $path[1]);
+        $this->validator->validate($range->upper, $class, $upper, $path[0] . $path[2]);
     }
 }

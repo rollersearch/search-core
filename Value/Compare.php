@@ -18,8 +18,8 @@ final readonly class Compare implements RequiresComparatorValueHolder
     public const OPERATORS = ['>=', '<=', '<>', '<', '>'];
 
     public function __construct(
-        private readonly mixed $value,
-        private readonly string $operator,
+        public readonly mixed $value,
+        public readonly string $operator,
     ) {
         if (! \in_array($operator, self::OPERATORS, true)) {
             throw new \InvalidArgumentException(
@@ -28,12 +28,18 @@ final readonly class Compare implements RequiresComparatorValueHolder
         }
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $operator
+     */
     public function getOperator(): string
     {
         return $this->operator;
     }
 
-    public function getValue()
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $value
+     */
+    public function getValue(): mixed
     {
         return $this->value;
     }

@@ -29,6 +29,8 @@ final class RangeTest extends TestCase
     public function it_has_a_lower_value(): void
     {
         $this->value = new Range(10, 20);
+
+        self::assertEquals(10, $this->value->lower);
         self::assertEquals(10, $this->value->getLower());
     }
 
@@ -38,6 +40,8 @@ final class RangeTest extends TestCase
     public function it_has_an_upper_value(): void
     {
         $this->value = new Range(10, 20);
+
+        self::assertEquals(20, $this->value->upper);
         self::assertEquals(20, $this->value->getUpper());
     }
 
@@ -47,6 +51,8 @@ final class RangeTest extends TestCase
     public function its_lower_value_is_inclusive_by_default(): void
     {
         $this->value = new Range(10, 20);
+
+        self::assertTrue($this->value->inclusiveLower);
         self::assertTrue($this->value->isLowerInclusive());
     }
 
@@ -56,6 +62,8 @@ final class RangeTest extends TestCase
     public function its_upper_value_should_be_inclusive_by_default(): void
     {
         $this->value = new Range(10, 20);
+
+        self::assertTrue($this->value->inclusiveUpper);
         self::assertTrue($this->value->isUpperInclusive());
     }
 
@@ -65,6 +73,8 @@ final class RangeTest extends TestCase
     public function it_allows_exclusive_lower_value(): void
     {
         $this->value = new Range(10, 20, false);
+
+        self::assertFalse($this->value->inclusiveLower);
         self::assertFalse($this->value->isLowerInclusive());
     }
 
@@ -74,6 +84,8 @@ final class RangeTest extends TestCase
     public function it_allows_exclusive_upper_value(): void
     {
         $this->value = new Range(10, 20, true, false);
+
+        self::assertFalse($this->value->inclusiveUpper);
         self::assertFalse($this->value->isUpperInclusive());
     }
 }

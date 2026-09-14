@@ -33,6 +33,7 @@ final class CompareTest extends TestCase
      */
     public function it_has_a_value(): void
     {
+        self::assertEquals(10, $this->value->value);
         self::assertEquals(10, $this->value->getValue());
     }
 
@@ -42,6 +43,7 @@ final class CompareTest extends TestCase
     public function it_has_an_operator(): void
     {
         self::assertEquals('>', $this->value->getOperator());
+        self::assertEquals('>', $this->value->operator);
     }
 
     /**
@@ -52,6 +54,9 @@ final class CompareTest extends TestCase
         $value = new \DateTimeImmutable();
 
         $this->value = new Compare($value, '<');
+
+        self::assertEquals($value, $this->value->value);
+        self::assertEquals('<', $this->value->operator);
 
         self::assertEquals($value, $this->value->getValue());
         self::assertEquals('<', $this->value->getOperator());

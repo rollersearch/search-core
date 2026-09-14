@@ -114,16 +114,16 @@ final class JsonExporter extends AbstractExporter
         foreach ($valuesBag->get(Compare::class) as $value) {
             /** @var Compare $value */
             $exportedValues['comparisons'][] = [
-                'operator' => $value->getOperator(),
-                'value' => $this->modelToNorm($value->getValue(), $field),
+                'operator' => $value->operator,
+                'value' => $this->modelToNorm($value->value, $field),
             ];
         }
 
         foreach ($valuesBag->get(PatternMatch::class) as $value) {
             /** @var PatternMatch $value */
             $exportedValues['pattern-matchers'][] = [
-                'type' => $value->getType(),
-                'value' => $value->getValue(),
+                'type' => $value->patternType,
+                'value' => $value->value,
                 'case-insensitive' => $value->isCaseInsensitive(),
             ];
         }
@@ -134,15 +134,15 @@ final class JsonExporter extends AbstractExporter
     private function exportRangeValue(Range $range, FieldConfig $field): array
     {
         $result = [
-            'lower' => $this->modelToNorm($range->getLower(), $field),
-            'upper' => $this->modelToNorm($range->getUpper(), $field),
+            'lower' => $this->modelToNorm($range->lower, $field),
+            'upper' => $this->modelToNorm($range->upper, $field),
         ];
 
-        if (! $range->isLowerInclusive()) {
+        if (! $range->inclusiveLower) {
             $result['inclusive-lower'] = false;
         }
 
-        if (! $range->isUpperInclusive()) {
+        if (! $range->inclusiveUpper) {
             $result['inclusive-upper'] = false;
         }
 

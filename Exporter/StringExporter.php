@@ -159,12 +159,12 @@ abstract class StringExporter extends AbstractExporter
 
         foreach ($valuesBag->get(Compare::class) as $value) {
             /** @var Compare $value */
-            $exportedValues .= $value->getOperator() . ' ' . $this->modelToExported($value->getValue(), $field) . ', ';
+            $exportedValues .= $value->operator . ' ' . $this->modelToExported($value->value, $field) . ', ';
         }
 
         foreach ($valuesBag->get(PatternMatch::class) as $value) {
             /** @var PatternMatch $value */
-            $exportedValues .= $this->getPatternMatchOperator($value) . ' ' . $this->exportValueAsString($value->getValue()) . ', ';
+            $exportedValues .= $this->getPatternMatchOperator($value) . ' ' . $this->exportValueAsString($value->value) . ', ';
         }
 
         return mb_rtrim($exportedValues, ', ');
@@ -196,11 +196,11 @@ abstract class StringExporter extends AbstractExporter
 
     private function exportRangeValue(Range $range, FieldConfig $field): string
     {
-        $result = ! $range->isLowerInclusive() ? ']' : '';
-        $result .= $this->modelToExported($range->getLower(), $field);
+        $result = ! $range->inclusiveLower ? ']' : '';
+        $result .= $this->modelToExported($range->lower, $field);
         $result .= ' ~ ';
-        $result .= $this->modelToExported($range->getUpper(), $field);
-        $result .= ! $range->isUpperInclusive() ? '[' : '';
+        $result .= $this->modelToExported($range->upper, $field);
+        $result .= ! $range->inclusiveUpper ? '[' : '';
 
         return $result;
     }

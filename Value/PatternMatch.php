@@ -29,15 +29,15 @@ final readonly class PatternMatch implements ValueHolder
     public const PATTERN_EQUALS = 'EQUALS';
     public const PATTERN_NOT_EQUALS = 'NOT_EQUALS';
 
-    private readonly string $patternType;
+    public readonly string $patternType;
 
     /**
      * @throws \InvalidArgumentException When the pattern-match type is invalid
      */
     public function __construct(
-        private readonly string $value,
+        public readonly string $value,
         string $patternType,
-        private readonly bool $caseInsensitive = false,
+        public readonly bool $caseInsensitive = false,
     ) {
         $typeConst = self::class . '::PATTERN_' . mb_strtoupper($patternType);
 
@@ -47,16 +47,25 @@ final readonly class PatternMatch implements ValueHolder
         $this->patternType = mb_strtoupper($patternType);
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $value
+     */
     public function getValue(): string
     {
         return $this->value;
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $patternType
+     */
     public function getType(): string
     {
         return $this->patternType;
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $caseInsensitive
+     */
     public function isCaseInsensitive(): bool
     {
         return $this->caseInsensitive;

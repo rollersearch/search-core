@@ -19,28 +19,40 @@ namespace Rollerworks\Component\Search\Value;
 class Range implements RequiresComparatorValueHolder
 {
     public function __construct(
-        private readonly mixed $lower,
-        private readonly mixed $upper,
-        private readonly bool $inclusiveLower = true,
-        private readonly bool $inclusiveUpper = true,
+        public readonly mixed $lower,
+        public readonly mixed $upper,
+        public readonly bool $inclusiveLower = true,
+        public readonly bool $inclusiveUpper = true,
     ) {
     }
 
-    public function getLower()
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $lower
+     */
+    public function getLower(): mixed
     {
         return $this->lower;
     }
 
-    public function getUpper()
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $upper
+     */
+    public function getUpper(): mixed
     {
         return $this->upper;
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $inclusiveLower
+     */
     public function isLowerInclusive(): bool
     {
         return $this->inclusiveLower;
     }
 
+    /**
+     * @deprecated Since RollerworksSearch 2.1 use the property $inclusiveUpper
+     */
     public function isUpperInclusive(): bool
     {
         return $this->inclusiveUpper;
